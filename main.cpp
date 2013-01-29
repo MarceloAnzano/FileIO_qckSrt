@@ -2,41 +2,42 @@
 #include<fstream>
 #include<string>
 #include<sstream>
+#define ARRAY_SIZE
 
 using namespace std;
 
-int partition(int* input, int p, int r)
+int partition(int* numbers, int start, int n)
 {
-    int pivot = input[r];
+    int pivot = numbers[n];
 
-    while ( p < r )
+    while ( start < n )
     {
-        while ( input[p] < pivot )
-            p++;
+        while ( numbers[start] < pivot )
+            start++;
 
-        while ( input[r] > pivot )
-            r--;
+        while ( numbers[n] > pivot )
+            n--;
 
-        if ( input[p] == input[r] )
-            p++;
-        else if ( p < r )
+        if ( numbers[start] == numbers[n] )
+            start++;
+        else if ( start < n )
         {
-            int tmp = input[p];
-            input[p] = input[r];
-            input[r] = tmp;
+            int tmp = numbers[start];
+            numbers[start] = numbers[n];
+            numbers[n] = tmp;
         }
     }
 
-    return r;
+    return n;
 }
 
-void quicksort(int* input, int p, int r)
+void quicksort(int* numbers, int start, int n)
 {
-    if ( p < r )
+    if ( start < n )
     {
-        int j = partition(input, p, r);
-        quicksort(input, p, j-1);
-        quicksort(input, j+1, r);
+        int x = partition(numbers, start, n);
+        quicksort(numbers, start, x-1);
+        quicksort(numbers, x+1, n);
     }
 }
 
@@ -53,7 +54,8 @@ int main()
         stringstream(line)>>numbers[c];
         c++;
     }
-//Laman ng Array
+
+    //Laman ng Array
     /*for(c = 0; c<n; c++)
     {
         cout<<numbers[c]<<endl;
@@ -62,7 +64,7 @@ int main()
     cout<<"\n\n\nSorting\n";
     quicksort(numbers, 0, n);
 
-//Laman ng Sorted Array
+    //Laman ng Sorted Array
     for(c = 0; c<n; c++)
     {
         cout<<numbers[c]<<endl;
