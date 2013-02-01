@@ -2,7 +2,6 @@
 #include<fstream>
 #include<string>
 #include<sstream>
-#define ARRAY_SIZE
 
 using namespace std;
 
